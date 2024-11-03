@@ -18,12 +18,10 @@ class UserController {
     const { email, password } = req.body
 
     const result = await pool.query(
-      `SELECT * FROM "users" WHERE email = '${email}'`
+      `SELECT * FROM "users" WHERE email = '${email}' AND password = '${password}'`
     )
 
     const user = result.rows
-
-    console.log(user)
 
     return res.json(user)
   }
