@@ -1,15 +1,17 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, TouchableOpacity} from 'react-native';
 import {styles} from "@/Styles/styles";
-import MyButton from "../Elements/MyButton";
 
-const OpeningScreen = ({navigation}) => {
+const LoggedInScreen = ({navigation}) => {
     return(
-        <View style={styles.defaultScreen}>
-            <Text style={styles.welcomeText}>Logged IN!</Text>
-            <MyButton onPress={() => {navigation.navigate('Login')}} style={styles.helloButton}> START </MyButton>
+        <View style={styles.container}>
+            <Text style={styles.title}>Logged In!</Text>
+
+            <TouchableOpacity style={styles.button} onPress={() => {navigation.navigate('Login')}}>
+                <Text style={styles.buttonText}>Go Back</Text>
+            </TouchableOpacity>
         </View>
     );
 }
 
-export default OpeningScreen;
+export default LoggedInScreen;

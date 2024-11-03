@@ -1,35 +1,40 @@
 import {StyleSheet} from "react-native";
 
 export const styles = StyleSheet.create({
-    defaultScreen:{
-        backgroundColor: 'white',
-        flex: 5,
-        paddingLeft: 30
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingHorizontal: 20,
+        backgroundColor: '#f5f5f5',
+    },
+    title: {
+        fontSize: 28,
+        fontWeight: 'bold',
+        marginBottom: 20,
+        color: '#333',
+    },
+    input: {
+        width: '100%',
+        height: 50,
+        borderColor: '#ddd',
+        borderWidth: 1,
+        borderRadius: 8,
+        paddingHorizontal: 10,
+        marginBottom: 15,
+        backgroundColor: '#fff',
     },
     button: {
-        position: 'relative',
-        flexDirection: 'row',
+        width: '100%',
+        height: 50,
+        backgroundColor: '#1E90FF',
+        borderRadius: 8,
         justifyContent: 'center',
-        bottom: -32,
-        padding: 10,
-        backgroundColor: '#4da6ff',
-        borderRadius: 5,
+        alignItems: 'center',
     },
-    text: {
-        color: 'black',
+    buttonText: {
+        color: '#fff',
+        fontSize: 18,
         fontWeight: 'bold',
     },
-    welcomeText: {
-        position: 'relative',
-        top: -24,
-        color: 'black',
-        fontSize: 24,
-        fontWeight: 'bold',
-    },
-    welcomeImage: {
-        width: '80%',
-        height: '50%',
-        padding: 10,
-        borderRadius: 5,
-    }
-})
+});

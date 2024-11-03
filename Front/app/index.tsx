@@ -11,15 +11,20 @@ const Stack = createNativeStackNavigator();
 
 export default function Index() {
     return (
-        <Stack.Navigator initialRouteName="Main">
-            <Stack.Screen name="Login"
-                          component={LoginScreen}
-                          options={({navigation}) => ({
-                              headerShown: false
-                          })
-                          }/>
-            <Stack.Screen  name ="LoggedIn"
-                           component={LoggedInScreen}/>
+        <Stack.Navigator
+            initialRouteName="Main"
+            screenOptions={{
+                headerShown: false,
+            }}
+        >
+            <Stack.Screen
+                name="Login"
+                component={LoginScreen}
+            />
+            <Stack.Screen
+                name="LoggedIn"
+                component={LoggedInScreen}
+            />
         </Stack.Navigator>
     );
 }

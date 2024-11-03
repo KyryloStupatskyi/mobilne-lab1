@@ -1,80 +1,78 @@
-import {styles} from "@/Styles/styles";
-import {loginStyles} from "@/Styles/LoginStyles";
-
-import React, {useEffect, useState} from 'react'
-import {View, Text, TextInput} from 'react-native'
-
-import MyButton from "@/Elements/MyButton";
+import React, { useState } from 'react';
+import { View, Text, TextInput, TouchableOpacity} from 'react-native';
+import {styles} from '@/Styles/styles';
 
 const LoginScreen = ({navigation}) => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
     const [isLogged, setIsLogged] = useState(false)
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
     const [error, setError] = useState('')
 
-
-    async function handleLogin(){
-
+    const handleLogin = async () => {
         const jsonData = {
-            Email: email,
-            Password: password
+            email: email,
+            password: password
         }
-
-        try{
-            const response = await fetch("localhost:3000/api/login", {
+        try {
+            //const response = await fetch("http://172.20.10.7:3000/api/login", {
+            const response = await fetch("http://192.168.0.171:3000/api/login", {
                 method: "POST",
                 headers: {
-                    "Content-Type":"application/json"
+                    "Content-Type": "application/json"
                 },
                 body: JSON.stringify(jsonData)
             });
-            if(response.ok){
+            if (response.ok) {
                 setIsLogged(true)
                 const responseData = await response.json();
+                navigation.navigate('LoggedIn');
+                /*
                 if(responseData.status === "success"){
                     navigation.navigate('LoggedIn')
                 }
+                 */
+                console.log(responseData);
             }
-        }
-        catch (error){
+        } catch (error) {
             setError('Invalid email or password')
             console.error(error);
-            if (error.response){
+            if (error.response) {
                 console.error('Response status:', error.response.status);
                 console.error('Response data:', error.response.data);
             }
         }
-    }
-
+    };
 
     return (
-        <View style={loginStyles.login_container}>
-            <Text style={styles.welcomeText}>Please login!</Text>
-            <View style={loginStyles.formContainer}>
-                <Text style={styles.text}>Login:</Text>
-                <TextInput
-                    style={loginStyles.input}
-                    placeholder="Login"
-                    keyboardType="email-address"
-                    onChangeText={(text) => setEmail(text)}
-                    defaultValue={email}
-                />
-                <Text style={styles.text}>Password:</Text>
-                <TextInput
-                    style={loginStyles.input}
-                    placeholder="Password"
-                    secureTextEntry={true}
-                    onChangeText={(text) => setPassword(text)}
-                    defaultValue={password}
-                />
-            </View>
+        <View style={styles.container}>
+            <Text style={styles.title}>Login</Text>
 
-            <MyButton onPress={handleLogin} style={loginStyles.button}>
-                <Text style={loginStyles.buttonText}>Login</Text>
-            </MyButton>
+            <TextInput
+                style={styles.input}
+                placeholder="Email"
+                placeholderTextColor="#666"
+                value={email}
+                onChangeText={setEmail}
+                keyboardType="email-address"
+                autoCapitalize="none"
+            />
 
+            <TextInput
+                style={styles.input}
+                placeholder="Password"
+                placeholderTextColor="#666"
+                value={password}
+                onChangeText={setPassword}
+                secureTextEntry
+                autoCapitalize="none"
+            />
+
+            <TouchableOpacity style={styles.button} onPress={handleLogin}>
+                <Text style={styles.buttonText}>Login</Text>
+            </TouchableOpacity>
         </View>
     );
-}
+};
 
 export default LoginScreen;
